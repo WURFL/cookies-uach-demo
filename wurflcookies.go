@@ -122,11 +122,8 @@ func DecodeLengthBin(input string) (map[string]string, error) {
 			if length > maxIntDiv10 {
 				return m, ErrIntegerOverflow
 			}
-			// Check for overflow after adding the new digit
+			// Extract the current digit
 			digit := int(b - '0')
-			if length > (math.MaxInt-digit)/10 {
-				return m, ErrIntegerOverflow
-			}
 			// In each iteration, we multiply the current length by 10
 			// and add the integer value of the current character.
 			// int(b-'0') is subtracting the ASCII value of '0' from the ASCII value of b
