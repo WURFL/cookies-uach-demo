@@ -70,9 +70,9 @@ func DecodeHeadersFromCookie(cookieName string, cookieData string) (map[string]s
 func DecodeLengthBin(input string) (map[string]string, error) {
 	m := make(map[string]string)
 
-	// Input validation
+	// Input validation, return empty map if input is empty
 	if input == "" {
-		return m, fmt.Errorf("%w: input string cannot be empty", ErrEmptyInput)
+		return m, nil
 	}
 
 	// Base64‑decode
@@ -132,9 +132,6 @@ func DecodeLengthBin(input string) (map[string]string, error) {
 		}
 
 		// Validate length
-		if length == 0 {
-			return m, fmt.Errorf("%w: invalid length %d (must be greater than zero)", ErrInvalidFormat, length)
-		}
 		if length > maxAllowedLength {
 			return m, fmt.Errorf("%w: length %d exceeds maximum allowed %d", ErrLengthTooLarge, length, maxAllowedLength)
 		}
