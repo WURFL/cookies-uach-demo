@@ -132,8 +132,8 @@ func DecodeLengthBin(input string) (map[string]string, error) {
 		}
 
 		// Validate length
-		if length <= 0 {
-			return m, fmt.Errorf("%w: invalid length %d (must be positive)", ErrInvalidFormat, length)
+		if length == 0 {
+			return m, fmt.Errorf("%w: invalid length %d (must be greater than zero)", ErrInvalidFormat, length)
 		}
 		if length > maxAllowedLength {
 			return m, fmt.Errorf("%w: length %d exceeds maximum allowed %d", ErrLengthTooLarge, length, maxAllowedLength)
